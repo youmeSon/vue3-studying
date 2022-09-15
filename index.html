@@ -10,10 +10,33 @@
   </head>
   <body>
     <div id="app">
-      <a :href="url" target="_blank">Please see my portfolio</a>
-      <h1>{{ product }}</h1>
-      <p>{{ description }}</p>
-      <img :src="image" :alt="description"/>
+      <header class="nav-bar">I am studying Vue 💖</header>
+      <a :href="url" target="_blank" class="portfolio">Please see my portfolio</a>
+      <div class="container">
+        <div class="item">
+          <img :src="image1" :alt="description" class="socks-img"/>
+          <div>
+            <h1>{{ product }}</h1>
+            <p>{{ description }}</p>
+            <p v-show="onSaleGreen">onSale</p>
+            <p v-if="inventoryGreen > 10">😍 You can buy right now!</p>
+            <p v-else-if="inventoryGreen < 10 && inventoryGreen > 0">🙄 Almost sold out! only {{ inventory }} left!</p>
+            <p v-else="inventoryGreen">😥 Out of stock</p>
+          </div>
+        </div>
+        <div class="item">
+          <img :src="image2" :alt="description" class="socks-img"/>
+          <div>
+            <h1>{{ product }}</h1>
+            <p>{{ description }}</p>
+            <p v-show="onSaleBlue">onSale</p>
+            <p v-if="inventoryBlue > 10">😍 You can buy right now!</p>
+            <p v-else-if="inventoryBlue < 10 && inventoryBlue > 0">🙄 Almost sold out! only {{ inventory }} left!</p>
+            <p v-else="inventoryBlue">😥 Out of stock</p>
+          </div>
+        </div>
+      </div>
+      
       
     </div>
 
