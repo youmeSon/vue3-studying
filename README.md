@@ -21,6 +21,20 @@ to render the product data withing the h1,
 
 ## 3. Conditional Rendering
 
+* main JS
+```
+const app = Vue.createApp({
+    data() {
+        return {
+            product: 'Socks',
+            image: './assets/images/socks_blue.jpg',
+            inStock: true, // new data property //
+            inventory: 100,
+        }
+    }
+})
+```
+
 🍓 Show and Hide
 
     <p v-show="inStock">In Stock</p>
