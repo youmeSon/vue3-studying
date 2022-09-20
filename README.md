@@ -86,3 +86,37 @@ data() {
 <div v-for="variant in variants" :key="variant.id">{{ variant.color }}</div>
 ```
 >this gives each DOM element a unique key so that Vue can grasp onto the element and not lose track of it as things update within the app. 
+
+## 4. Event Handling 
+
+    v-on:click
+    
+
+A shorthand for v-on
+
+    @click
+
+    @mouseover
+
+
+```
+<button class="button" v-on:click="addToCart">Add to Cart</button>
+```
+
+```
+const app = Vue.createApp({
+  data() {
+    return {
+      cart: 0,
+      ...
+    }
+  },
+  methods: {
+    addToCart() {
+      this.cart += 1
+    }
+  }
+})
+```
+
+

@@ -11,10 +11,13 @@
   <body>
     <div id="app">
       <header class="nav-bar">I am studying Vue 💖</header>
-      <a :href="url" target="_blank" class="portfolio">Please see my portfolio</a>
+      <div class="sub-nav">
+        <a :href="url" target="_blank" class="portfolio">Please see my portfolio</a>
+        <p class="cart" :src="cart">Cart {{ cart }}</p>
+      </div>
       <div class="container">
         <div class="item">
-          <img :src="image1" :alt="description" class="socks-img"/>
+          <img :src="image" :alt="description" class="socks-img"/>
           <div>
             <h1>{{ product }}</h1>
             <p>{{ description }}</p>
@@ -23,13 +26,19 @@
             <p v-else-if="inventoryGreen < 10 && inventoryGreen > 0">🙄 Almost sold out! only {{ inventory }} left!</p>
             <p v-else="inventoryGreen">😥 Out of stock</p>
             <p>What sizes we have? </p>
-            <ul>
-              <li v-for="size in sizes">{{ size }}</li>
+            <ul class="sizes">
+              <li class="size" v-for="size in sizes">{{ size }}</li>
             </ul>
+            <p>Other colour options?</p>
+            <ul>
+              <li  v-for="variant in variants" :key="variant.id" @mouseover="changeColour(variant.image)">{{ variant.color }}</li>
+            </ul>
+            <button class="button" @click="addToCart">Add to Cart</button>
+            <button class="button" @click="removeFromCart">Remove it</button>
           </div>
         </div>
         <div class="item">
-          <img :src="image2" :alt="description" class="socks-img"/>
+          <img :src="image" :alt="description" class="socks-img"/>
           <div>
             <h1>{{ product }}</h1>
             <p>{{ description }}</p>
@@ -38,12 +47,15 @@
             <p v-else-if="inventoryBlue < 10 && inventoryBlue > 0">🙄 Almost sold out! only {{ inventory }} left!</p>
             <p v-else="inventoryBlue">😥 Out of stock</p>
             <p>What sizes we have? </p>
-            <ul>
-              <li v-for="size in sizes" >{{ size }}</li>
+            <ul class="sizes">
+              <li class="size" v-for="size in sizes" >{{ size }}</li>
             </ul>
+            <p>Other colour options?</p>
             <ul>
-              <li v-for="variant in variants" :key="variant.id">{{ variant.color }}</li>
+              <li  v-for="variant in variants" :key="variant.id" @mouseover="changeColour(variant.image)">{{ variant.color }}</li>
             </ul>
+            <button class="button" @click="addToCart">Add to Cart</button>
+            <button class="button" @click="removeFromCart">Remove it</button>
           </div>
         </div>
       </div>
