@@ -10,6 +10,11 @@ const app = Vue.createApp({
             inventoryGreen: 100,
             onSaleBlue: false,
             inventoryBlue: 0,
+            sizes: ['small', 'medium', 'large'],
+            variants : [
+                { id: 1234, color: 'green'},
+                { id: 3345, color: 'blue'}
+            ]
         }
     }
 

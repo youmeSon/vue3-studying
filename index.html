@@ -22,6 +22,10 @@
             <p v-if="inventoryGreen > 10">😍 You can buy right now!</p>
             <p v-else-if="inventoryGreen < 10 && inventoryGreen > 0">🙄 Almost sold out! only {{ inventory }} left!</p>
             <p v-else="inventoryGreen">😥 Out of stock</p>
+            <p>What sizes we have? </p>
+            <ul>
+              <li v-for="size in sizes">{{ size }}</li>
+            </ul>
           </div>
         </div>
         <div class="item">
@@ -33,6 +37,13 @@
             <p v-if="inventoryBlue > 10">😍 You can buy right now!</p>
             <p v-else-if="inventoryBlue < 10 && inventoryBlue > 0">🙄 Almost sold out! only {{ inventory }} left!</p>
             <p v-else="inventoryBlue">😥 Out of stock</p>
+            <p>What sizes we have? </p>
+            <ul>
+              <li v-for="size in sizes" >{{ size }}</li>
+            </ul>
+            <ul>
+              <li v-for="variant in variants" :key="variant.id">{{ variant.color }}</li>
+            </ul>
           </div>
         </div>
       </div>

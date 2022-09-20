@@ -46,3 +46,43 @@ const app = Vue.createApp({
 <p v-else-if="inventory <= 10 && inventory > 0">Almost sold out!</p>
 <p v-else>Out of Stock</p>
 ```
+
+## 4. List Rendering
+
+for loop
+
+    v-for
+
+``` 
+const app = Vue.createApp({
+    data() {
+        return {
+            ...
+            details: ['50% cotton', '30% wool', '20% polyester']
+        }
+    }
+})
+``` 
+
+```
+<ul>
+  <li v-for="detail in details">{{ detail }}</li>
+</ul>
+``` 
+details refers to the details array in our data, and detail is the alias for the current element from that array, as we're looping through it to print out a new li. 
+
+```
+data() {
+  return {
+    ...
+    variants: [
+      { id: 2234, color: 'green' },
+      { id: 2235, color: 'blue' }
+    ]
+  }
+}
+``` 
+```
+<div v-for="variant in variants" :key="variant.id">{{ variant.color }}</div>
+```
+>this gives each DOM element a unique key so that Vue can grasp onto the element and not lose track of it as things update within the app. 
