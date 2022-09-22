@@ -31,10 +31,10 @@
             </ul>
             <p>Other colour options?</p>
             <ul>
-              <li  v-for="variant in variants" :key="variant.id" @mouseover="changeColour(variant.image)">{{ variant.color }}</li>
+              <li  v-for="variant in variants" :key="variant.id" @mouseover="changeColour(variant.image)" class="color-circle" :style="{ 'background-color': variant.color}"></li>
             </ul>
-            <button class="button" @click="addToCart">Add to Cart</button>
-            <button class="button" @click="removeFromCart">Remove it</button>
+            <button class="button" @click="addToCart" :disabled="!onSaleGreen" :class="{ disabledButton: !onSaleGreen}">Add to Cart</button>
+            <button class="button" @click="removeFromCart" :disabled="!onSaleGreen" :class="{ disabledButton: !onSaleGreen}">Remove it</button>
           </div>
         </div>
         <div class="item">
@@ -52,10 +52,10 @@
             </ul>
             <p>Other colour options?</p>
             <ul>
-              <li  v-for="variant in variants" :key="variant.id" @mouseover="changeColour(variant.image)">{{ variant.color }}</li>
+              <li  v-for="variant in variants" :key="variant.id" @mouseover="changeColour(variant.image)" class="color-circle" :style="{ 'background-color': variant.color}"></li>
             </ul>
-            <button class="button" @click="addToCart">Add to Cart</button>
-            <button class="button" @click="removeFromCart">Remove it</button>
+            <button class="button" @click="addToCart" :disabled="!onSaleBlue" :class="{ disabledButton: !onSaleBlue}">Add to Cart</button>
+            <button class="button" @click="removeFromCart" :disabled="!onSaleBlue" :class="{ disabledButton: !onSaleBlue}">Remove it</button>
           </div>
         </div>
       </div>

@@ -47,7 +47,7 @@ const app = Vue.createApp({
 <p v-else>Out of Stock</p>
 ```
 
-## 4. List Rendering
+## 5. List Rendering
 
 for loop
 
@@ -87,7 +87,7 @@ data() {
 ```
 >this gives each DOM element a unique key so that Vue can grasp onto the element and not lose track of it as things update within the app. 
 
-## 4. Event Handling 
+## 6. Event Handling 
 
     v-on:click
     
@@ -119,4 +119,64 @@ const app = Vue.createApp({
 })
 ```
 
+## 7.Class & Style Binding 
 
+✨Style binding 
+
+we want to bind styles to the variant divs. WE do so by using v-bind (or its shorthand: **:** )
+
+```
+<div 
+  v-for="variant in variants" 
+  :key="variant.id" 
+  @mouseover="updateImage(variant.image)" 
+  class="color-circle" 
+  :style="{ backgroundColor: variant.color }">
+</div>
+```
+
+>we can use '`background-color`' instead of `backgroundColor`. 
+
+💥On our variant `div`, we added the `style` attibute and bound a style object to it. 
+```
+<div 
+  :style="{ backgroundColor: variant.color }">
+</div>
+```
+
+✨ Stying Binding: Objects
+
+sometimes you might want to add a bunch of styles to an element, but adding them all in-line could get messy. In these situations, we can bind to an entire style object that lives within our data. 
+```
+<div :style="styles"></div>
+```
+```
+data() {
+  return {
+    styles: {
+      color: 'red',
+      fontSize: '14px'
+    }
+  }
+}
+```
+
+### 🐱‍🚀 Class Binding 
+
+✅ disabled button 
+```
+<button :disabled="!inStock">
+```
+✅ Add `class`
+
+🐶 If inStock is false, add `disabledButton` !!! 
+-> 
+```
+<button :class="{ disabledButton: !inStock }">
+```
+
+### 🐱‍🚀 Ternary Operators
+Same order like normal ternary operators.
+```
+<div :class="[isActive ? activeClass : '']"> 
+```
