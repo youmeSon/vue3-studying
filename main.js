@@ -2,18 +2,15 @@ const app = Vue.createApp({
     data() {
         return {
             cart: 0,
-            image: './assets/images/socks_green.jpg',
+            brand: 'Youme',
             product: 'socks',
             description: 'It makes your foot warm.',
             url: 'https://youmeson.github.io/portfolio/',
-            onSaleGreen: true,
-            inventoryGreen: 100,
-            onSaleBlue: false,
-            inventoryBlue: 0,
             sizes: ['small', 'medium', 'large'],
+            selectedVariant: 0,
             variants : [
-                { id: 1234, color: 'green', image: './assets/images/socks_green.jpg'},
-                { id: 3345, color: 'blue', image: './assets/images/socks_blue.jpg'}
+                { id: 1234, color: 'green', image: './assets/images/socks_green.jpg', quantity: 50, sale: true},
+                { id: 3345, color: 'blue', image: './assets/images/socks_blue.jpg', quantity: 0, sale: false}
             ]
         }
     },
@@ -24,10 +21,24 @@ const app = Vue.createApp({
         removeFromCart() {
             this.cart > 0 ? this.cart -= 1 : 0;
         },
-        changeColour(variantImage) {
-            this.image = variantImage;
+        updateVariant(index) {
+            this.selectedVariant = index;
         }
 
+    },
+    computed: {
+        title() {
+            return this.brand + ' ' + this.product;
+        },
+        image() {
+            return this.variants[this.selectedVariant].image;
+        },
+        inStock() {
+            return this.variants[this.selectedVariant].quantity;
+        },
+        onSale() {
+            return this.variants[this.selectedVariant].sale;
+        }
     }
 
 });

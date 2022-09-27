@@ -180,3 +180,45 @@ Same order like normal ternary operators.
 ```
 <div :class="[isActive ? activeClass : '']"> 
 ```
+
+## 8. Computed Properties (연산 프로퍼티)
+Computed properties are exactly like they sound: properties we can add to a Vue app that compute values for us. They help us keep computational logic out of the template and give us performance improvements that we'll cover soon.
+
+```
+<h1>{{ title }}</h1>
+```
+```
+computed: {
+  title() {
+    return this.brand + ' ' + this.product
+  }
+}
+```
+
+⭐**computed properties provide us a performance improvement**
+
+
+### 🐱‍🚀 Computing Image & Quantity 
+```
+<div 
+  v-for="(variant, index) in variants" 
+  :key="variant.id" 
+  @mouseover="updateVariant(index)" <! -- new method -->
+  class="color-circle" 
+  :style="{ backgroundColor: variant.color }">
+</div>
+```
+Notice how we’re passing in the index of the currently hovered-on variant: `updateVariant(index)`. We got access to that index by adding it as a second parameter in our v-for directive:
+  
+    v-for="(variant, index) in variants"
+
+
+```
+image() {
+  return this.variants[this.selectedVariant].image
+}
+```
+
+🙄
+> computed property는 method와 비교하자면, computed property는 계산된 값으로 cashing이라는 기능이 있어 읽기전용의 상수의 개념을 지니며, method는 그때 그때 연산과정을 거쳐 실행되기 때문에 동일한 연산과정이 아주 많이 반복된다면 computed property를 사용하는 것을 추천한다. 
+>> performance improvements!! 💥
