@@ -13,9 +13,9 @@
       <header class="nav-bar">I am studying Vue 💖</header>
       <div class="sub-nav">
         <a :href="url" target="_blank" class="portfolio">Please see my portfolio</a>
-        <p class="cart" :src="cart">Cart {{ cart }}</p>
+        <p class="cart" :src="cart">Cart {{ cart.length }}</p>
       </div>
-      <display-container :premium="premium"></display-container>
+      <display-container :premium="premium" @add-to-cart="updateCart" @remove-by-id="removeItem"></display-container>
       
       
     </div>

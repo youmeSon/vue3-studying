@@ -343,3 +343,68 @@ computed: {
     }
 }
 ```
+
+## 10.Communicating Event
+
+### 🐱‍🚀 Emitting the event
+we already know that props are a way to pass data down into a component (by props), but what about when something happens within that component, like a button click? How do we let other parts of our app know that that event happened? 
+
+That's why we need to emit the event! 
+telling the parent that it happened. 
+
+```
+methods: {
+  addToCart() {
+    this.$emit('add-to-cart')
+  }
+  ...
+ }
+```
+We'll write `this.$emit()` and emit an event called `add-to-cart`. So when the button is clicked, we're emitting, or bubbling up, that event. We can listen for that event from within the parent scope, where we're using `product-display`, by adding a listener: `@add-to-cart`.
+
+```
+<product-display :premium="premium" @add-to-cart="updateCart"></product-display>
+```
+```
+const app = Vue.createApp({
+  data() {
+    return {
+      cart: [],
+      ...
+    }
+  },
+  methods: {
+    updateCart() {
+      this.cart += 1
+    }
+  }
+})
+```
+
+### 🐱‍🚀 Adding product id to the cart 
+To make our app more realistic, our cart shouldn’t just be a number. It should be an array that contains the ids of the products that are added into it. So let’s do a bit of refactoring.
+```
+const app = Vue.createApp({
+  data() {
+    return {
+      cart: [],
+      ...
+    }
+  },
+  methods: {
+    updateCart(id) {
+      this.cart.push(id)
+    }
+  }
+})
+```
+Now, `cart` is an array and `updateCart(id)` pushes the product id into it. We just need to add a payload to our `add-to-cart` event emission, so `updateCart` has access to that id.
+```
+methods: {
+  addToCart() {
+    this.$emit('add-to-cart', this.variants[this.selectedVariant].id)
+  }
+  ...
+ }
+ ```
+ Here, we’ve added a second parameter and grabbed the product’s `id`,

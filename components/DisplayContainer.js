@@ -54,10 +54,11 @@ app.component('display-container', {
     },
     methods: {
         addToCart() {
-            this.cart += 1;
+            this.$emit('add-to-cart', this.variants[this.selectedVariant].id)
         },
         removeFromCart() {
-            this.cart > 0 ? this.cart -= 1 : 0;
+            this.$emit('remove-by-id', this.variants[this.selectedVariant].id)
+            // this.cart > 0 ? this.cart -= 1 : 0;
         },
         updateVariant(index) {
             this.selectedVariant = index;
