@@ -222,3 +222,124 @@ image() {
 🙄
 > computed property는 method와 비교하자면, computed property는 계산된 값으로 cashing이라는 기능이 있어 읽기전용의 상수의 개념을 지니며, method는 그때 그때 연산과정을 거쳐 실행되기 때문에 동일한 연산과정이 아주 많이 반복된다면 computed property를 사용하는 것을 추천한다. 
 >> performance improvements!! 💥
+
+
+## 9.Components & Props
+
+1. create the components folder and `ProductDisply.js`
+
+```
+app.component('product-display', {})
+```
+🍓 The first argument is the component name, `product-display` in this case, and the second arguemnt is an object to configure our component. 
+
+### 🐱‍🚀 Template
+Because we need our component to have structure, we'll add the template property and paste all of the product-based HTML code taht currently resides in **index.html into here**, within a template literal.
+```
+app.component('product-display', {
+  template: 
+    /*html*/ 
+    `<div class="product-display">
+      <div class="product-container">
+        <div class="product-image">
+          <img v-bind:src="image">
+        </div>
+        <div class="product-info">
+          <h1>{{ title }}</h1>
+  
+          <p v-if="inStock">In Stock</p>
+          <p v-else>Out of Stock</p>
+  
+          <div 
+            v-for="(variant, index) in variants" 
+            :key="variant.id" 
+            @mouseover="updateVariant(index)" 
+            class="color-circle" 
+            :style="{ backgroundColor: variant.color }">
+          </div>
+          
+          <button 
+            class="button" 
+            :class="{ disabledButton: !inStock }" 
+            :disabled="!inStock" 
+            v-on:click="addToCart">
+            Add to Cart
+          </button>
+        </div>
+      </div>
+    </div>`
+})
+```
+
+### 🐱‍🚀 Importing the Components
+In order to make use of `product-display`, we need to import i into we'll **index.html**
+
+```
+<!-- Import Components -->
+<script src="./components/ProductDisplay.js"></script>
+```
+```
+<div id="app">
+  <div class="nav-bar"></div>
+
+  <div class="cart">Cart({{ cart }})</div>
+  <product-display></product-display>
+</div>
+```
+
+### 🐱‍🚀 Props - Giving our components a prop
+
+main.js
+```
+const app = Vue.createApp({
+  data() {
+    return {
+      cart: 0,
+      premium: true
+    }
+  }
+})
+```
+If a use is premium, their shipping will be free. So our product-display component needs access to this data. 
+
+```
+app.component('product-display', {
+  props: {
+    premium: {
+      type: Boolean,
+      required: true
+    }
+  },
+  ...
+}
+```
+```
+<div id="app">
+  <div class="nav-bar"></div>
+
+  <div class="cart">Cart({{ cart }})</div>
+  <product-display :premium="premium"></product-display>
+</div>
+```
+
+### 🐱‍🚀 Using the Prop 
+```
+template: 
+  /*html*/
+  `<div class="product-display">
+    ...
+      <p>Shipping: {{ shipping }}</p>
+    ...
+  </div>`,
+  ```
+```
+computed: {
+  ...
+  shipping() {
+    if (this.premium) {
+      return 'Free'
+    }
+      return 2.99
+    }
+}
+```
